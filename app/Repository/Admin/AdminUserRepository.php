@@ -45,7 +45,7 @@ class AdminUserRepository
                     }
                 })
                 ->union($first_query)
-                ->orderBy('id', 'desc')
+                ->orderBy('level_id', 'ASC')
                 ->paginate($perPage);
         } else {
             $data = AdminUser::query()
@@ -54,10 +54,11 @@ class AdminUserRepository
                 })->where(function ($query) use ($keyword) {
                     if (isset($keyword['name']) && $keyword['name'] != "") {
                         $query->where('name', 'like', "%{$keyword['name']}%")
-                            ->orWhere('remark', 'like', "%{$keyword['name']}%");
+                        ->orWhere('account', 'like', "%{$keyword['name']}%")
+                        ->orWhere('remark', 'like', "%{$keyword['name']}%");
                     }
                 })
-                ->orderBy('id', 'desc')
+                ->orderBy('level_id', 'ASC')
                 ->paginate($perPage);
         }
 //        print_r(DB::getQueryLog());   //获取查询语句、参数和执行时间
