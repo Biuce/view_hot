@@ -39,6 +39,12 @@ class AdminUser extends Authenticatable
         ]
     ];
 
+    public function getAuthPassword()
+    {
+        //return $this->attributes['password2'];
+        return $this->pwd;   //或其它名称，以上两种写法都OK
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Model\Admin\Comment', 'user_id');
